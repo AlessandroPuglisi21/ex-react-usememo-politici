@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Card from './Crad';
 
 function ListaPolitici() {
     const [politico, setPolitico] = useState([]);
@@ -36,6 +37,7 @@ function ListaPolitici() {
             || item.biography.toLowerCase().includes(value)
         );
         setFilteredPolitico(filtered);
+        console.log("Dati filtrati:", filtered)
     };
 
     if (loading) return <p>Caricamento...</p>;
@@ -55,15 +57,8 @@ function ListaPolitici() {
             <div className="max-w-7xl mx-auto p-4">
                 <h1 className="text-3xl font-bold text-center mb-6">Lista Politici</h1>
                 <div className="grid md:grid-cols-4 gap-6">
-                    {filteredPolitico.map((item, index) => (
-                        <div key={index} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-                            <img src={item.image} alt={item.name} className="w-full h-70 object-center" />
-                            <div className="p-4">
-                                <h2 className="text-xl font-semibold text-blue-600 dark:text-sky-400">{item.name}</h2>
-                                <h3 className="text-gray-700 dark:text-gray-300">{item.position}</h3>
-                                <p className="text-gray-600 dark:text-gray-400 mt-2">{item.biography}</p>
-                            </div>
-                        </div>
+                    {filteredPolitico.map((item) => (
+                        <Card key={item.id} item={item} />
                     ))}
                 </div>
             </div>
